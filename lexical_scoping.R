@@ -1,3 +1,5 @@
+# makeVector creates a special "vector", which is  a list containing a function to ,get the value of the vectorset the value of the vector,get the value of the vector
+#set the value of the mean,get the value of the mean
 ###################
 makeVector <- function(x = numeric()) {
         m <- NULL
@@ -14,6 +16,8 @@ makeVector <- function(x = numeric()) {
 }
 
 #####################
+#The following function calculates the mean of the special "vector" created with the above function.
+#####################
 cachemean <- function(x, ...) {
         m <- x$getmean()
         if(!is.null(m)) {
@@ -27,7 +31,9 @@ cachemean <- function(x, ...) {
 }
 
 
-#############
+###################
+#This function creates a special "matrix" object that can cache its inverse.
+####################
 makeCacheMatrix <- function(x = matrix()) {
   j <- NULL
   set <- function(y){
@@ -41,7 +47,10 @@ makeCacheMatrix <- function(x = matrix()) {
   setInverse = setInverse, 
   getInverse = getInverse)
 }
-
+###################
+#This function computes the inverse of the special "matrix" returned by makeCacheMatrix above. 
+#If the inverse has already been calculated (and the matrix has not changed), then the cachesolve should retrieve the inverse from the cache.
+###################
 cacheSolve <- function(x, ...) {
 ## Return a matrix that is the inverse of 'x'
   j <- x$getInverse()
@@ -50,7 +59,7 @@ cacheSolve <- function(x, ...) {
   return(j)
   }
   mat <- x$get()
-  j <- solve(mat,...)
+  j <- solve(mat,...)    #Computing the inverse of a square matrix can be done with the solve function in R.
   x$setInverse(j)
   j
 }
